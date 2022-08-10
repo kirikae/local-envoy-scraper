@@ -3,11 +3,13 @@
 import os
 import time
 import requests
+import threading
 import json
 import argparse
 import logging
 
 from getpass import getpass
+from requests import HTTPDigestAuth
 
 logging.basicConfig(format='%(ascitime)s %(levelname)s %(message)s', level=logging.INFO)
 
@@ -58,9 +60,15 @@ inverter_gauges = {
     'max': Gauge('inverter_max_report_watts', 'Max reported watts', ['serial', 'location']),
 }
 
-class Options:
+
+
+
+
+
+
+class Config:
     """
-    Define any auth options that may be required
+    Define any config or auth options that may be required
     For local access to the Envoy system a simple
     Username and Password is required.
     By default this is:
